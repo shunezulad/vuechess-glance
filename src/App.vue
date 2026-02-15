@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-const foo = ref([1, 2, 3])
+const foo = ref([1, 2, 3, 8])
 
 function update() {
   foo.value.push(9)
