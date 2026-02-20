@@ -1,0 +1,14 @@
+[data-theme='wood'] {
+  :root {
+    --board-light: #f0d9b5;
+    --board-dark: #b58863;
+
+    --primary: #254f22;
+    --secondary: #15173d;
+  }
+}
+
+[data-theme='minimal'] {
+  --primary: green;
+  --secondary: yellow;
+}

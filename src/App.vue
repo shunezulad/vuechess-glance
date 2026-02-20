@@ -1,24 +1,37 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { LSKeys, Themes, useThemeStore } from './stores/theme'
+import ThemeSwitcher from './components/ThemeSwitcher.vue'
 
-const foo = ref([1, 2, 3, 8])
+const themeStore = useThemeStore()
 
-function update() {
-  foo.value.push(9)
-}
+watch(
+  () => themeStore.current,
+  (newTheme) => document.documentElement.setAttribute('data-theme', newTheme),
+  {
+    immediate: true,
+  },
+)
 
 onMounted(() => {
-  update()
+  const saved = localStorage.getItem(LSKeys.PreferredTheme)
+
+  if (saved) {
+    themeStore.setTheme(saved as Themes)
+  }
 })
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
+  <h1 class="heading">You did it!</h1>
+  <p class="subheading">
     Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
     documentation
-    {{ foo }}
   </p>
+
+  <ThemeSwitcher />
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'styles/main.scss';
+</style>
